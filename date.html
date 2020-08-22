@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #app {
+            width: 100%;
+            height: 100%;
+            background-color: darkslateblue;
+            display: flex;
+            flex-direction: column;
+        }
+        #up,
+        #bottom {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #up {
+            margin-top: 100px;
+        }
+        #bottom {
+            margin-bottom: 100px;
+        }
+
+        #date,
+        #time {
+            color: #eeeeee;
+            font-size: 150px;
+        }
+        #time {
+            width: 60%;
+            display: flex;
+            justify-content: center;
+        }
+        #hour,
+        #minutes{
+            letter-spacing: 10px;
+        }
+        #split {
+            display: flex;
+            align-items: center;
+            animation: blink 1s steps(1) infinite;
+        }
+        #split div {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 25px;
+        }
+        @keyframes blink {
+            50% {
+                color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="up">
+            <div id="date"></div>
+        </div>
+        <div id="bottom">
+            <div id="time">
+                <div id="hour"></div>
+                <div id="split">
+                    <div>:</div>
+                </div>
+                <div id="minutes"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function setDate() {
+            let month = new Date().getMonth() + 1;
+            let date = new Date().getDate();
+            let nowDate = `${month}月${date}日`;
+            const dateEl = document.getElementById("date");
+            dateEl.innerText = nowDate;
+        }
+        function setTime() {
+            let hour = new Date().getHours();
+            let minutes = new Date().getMinutes();
+            if (parseInt(minutes) < 10) minutes = '0' + minutes;
+            const hourEl = document.getElementById("hour");
+            const minutesEl = document.getElementById("minutes");
+            hourEl.innerText = hour;
+            minutesEl.innerText = minutes;
+        }
+
+        setDate();
+        setTime();
+        setInterval(setTime, 1000);
+    </script>
+</body>
+</html>
